@@ -1,15 +1,15 @@
 package sort;
 
-import net.sourceforge.pinyin4j.PinyinHelper;
+import Resources.pinyin.src.net.sourceforge.pinyin4j.PinyinHelper;
 
 import java.lang.Object;
 
 import org.apache.commons.lang3.ArrayUtils;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import Resources.pinyin.src.net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import Resources.pinyin.src.net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import Resources.pinyin.src.net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import Resources.pinyin.src.net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import Resources.pinyin.src.net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 /**
  *
  * @author MNegi
