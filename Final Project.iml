@@ -10,21 +10,20 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/Files/lang3/commons-lang3-3.12.0.jar!/" />
+          <root url="file://$MODULE_DIR$/Files/pinyin/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/Files/pinyin/lib" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
-        <CLASSES />
-        <JAVADOC>
-          <root url="file://$MODULE_DIR$/Files/pinyin/doc" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/Files/pinyin/src" />
-        </SOURCES>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/Files/lang3/commons-lang3-3.12.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
