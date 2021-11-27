@@ -42,6 +42,7 @@ public class SortBenchmark {
         benchmark.sortLocalDateTimes(100000, config);
     }
 
+
     // CONSIDER generifying common code (but it's difficult if not impossible)
     private void sortIntegers(final int n) {
         final Random random = new Random();
@@ -85,6 +86,7 @@ public class SortBenchmark {
 
         // NOTE: Leipzig English words benchmarks (according to command-line arguments)
         wordCounts.forEach(this::doLeipzigBenchmarkEnglish);
+
 
         // NOTE: Leipzig Chines words benchmarks (according to command-line arguments)
         doLeipzigBenchmark("zho-simp-tw_web_2014_10K-sentences.txt", 5000, 1000);
@@ -268,7 +270,7 @@ public class SortBenchmark {
         return 0.25 * n * (n - 1);
     }
 
-    private static Collection<String> lineAsList(String line) {
+    public static Collection<String> lineAsList(String line) {
         List<String> words = new ArrayList<>();
         words.add(line);
         return words;

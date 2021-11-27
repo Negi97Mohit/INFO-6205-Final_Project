@@ -23,7 +23,7 @@ import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 /**
  * Singleton class HuskySortBenchmarkHelper
  */
-class SortBenchmarkHelper {
+public class SortBenchmarkHelper {
 
     final static LazyLogger logger = new LazyLogger(SortBenchmarkHelper.class);
 
@@ -37,10 +37,12 @@ class SortBenchmarkHelper {
     }
 
     // TEST
-    static String[] getWords(String resource, Function<String, Collection<String>> getStrings) throws FileNotFoundException {
+    public static String[] getWords(String resource, Function<String, Collection<String>> getStrings) throws FileNotFoundException {
         List<String> words = new ArrayList<>();
         FileReader fr = new FileReader(getFile(resource, SortBenchmarkHelper.class));
-        for (Object line : new BufferedReader(fr).lines().toArray()) words.addAll(getStrings.apply((String) line));
+        for (Object line : new BufferedReader(fr).lines().toArray()) {
+            words.addAll(getStrings.apply((String) line));
+        }
         words = words.stream().distinct().filter(new Predicate<String>() {
             private static final int MINIMUM_LENGTH = 2;
 
@@ -59,6 +61,7 @@ class SortBenchmarkHelper {
         if (matcher.find()) {
             final String word = matcher.group(1);
             final String[] strings = word.split("[\\s\\p{Punct}\\uFF0C]");
+            System.out.println(strings.length);
             return Arrays.asList(strings);
         } else
             return new ArrayList<>();
@@ -93,6 +96,6 @@ class SortBenchmarkHelper {
     }
 
     // NOTE private constructor (singleton pattern)
-    private SortBenchmarkHelper() {
+    public SortBenchmarkHelper() {
     }
 }
