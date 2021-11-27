@@ -4,8 +4,12 @@
 
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.FinalProject.radixSort;
+import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.toEng;
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,88 +137,118 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
 
     public static void main (String args[]) {
-        for(int n = 500; n<=8000; n*=2)
-        {
-
-            System.out.println("__________________________________");
-            System.out.println("n: "+n);
-
-            InsertionSort is = new InsertionSort();
-            Random rd = new Random();
-
-            //Array Generations
-
-            //Random
-            final List<Integer> list_random = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                list_random.add(rd.nextInt(n));}
-            Integer[] random_integers = list_random.toArray(new Integer[0]);
-
-            //arranged
-            final List<Integer> list_arranged = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                list_arranged.add(i+1);}
-
-            Integer[] sorted_integers = list_arranged.toArray(new Integer[0]);
-
-            //reverse
-            final List<Integer> list_reverse = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                list_reverse.add(n-i);
-            }
-
-            Integer[] reverse_integers = list_reverse.toArray(new Integer[0]);
-
-            //partial
-            final List<Integer> list_partial = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                if(i>n/2) {
-                    list_partial.add(rd.nextInt(n));
-                }
-                else {
-                    list_partial.add(i);}}
-
-            Integer[] partial_integers = list_partial.toArray(new Integer[0]);
-
-            //Benchmarking
-            //Random
-            Benchmark<Boolean> bm_rand = new Benchmark_Timer<>(
-                    "randomSort", b -> {
-                is.sort(random_integers.clone(),0,random_integers.length);
-
-            });
-            double x_rand = bm_rand.run(true, 10);
-
-            //arranged
-            Benchmark<Boolean> bm_arranged = new Benchmark_Timer<>(
-                    "arrangedSort", b -> {
-                is.sort(sorted_integers.clone(),0, sorted_integers.length);
-
-            });
-            double x_arranged = bm_arranged.run(true,  10);
-
-            //reverse
-            Benchmark<Boolean> bm_reverse = new Benchmark_Timer<>(
-                    "reverseSort", b -> {
-                is.sort(reverse_integers.clone(),0,reverse_integers.length);
-
-            });
-            double x_reverse = bm_reverse.run(true, 10);
-
-            //partial
-            Benchmark<Boolean> bm_partial = new Benchmark_Timer<>(
-                    "partialSort", b -> {
-                is.sort(partial_integers.clone(),0,partial_integers.length);
-
-            });
-            double x_partial = bm_partial.run(true, 10);
-
-
-            System.out.println("Random: "+x_rand);
-            System.out.println("Ordered: "+x_arranged);
-            System.out.println("Reverse: "+x_reverse);
-            System.out.println("Partial: "+x_partial);
+//        for(int n = 500; n<=8000; n*=2)
+//        {
+//
+//            System.out.println("__________________________________");
+//            System.out.println("n: "+n);
+//
+//            InsertionSort is = new InsertionSort();
+//            Random rd = new Random();
+//
+//            //Array Generations
+//
+//            //Random
+//            final List<Integer> list_random = new ArrayList<>();
+//            for (int i = 0; i < n; i++) {
+//                list_random.add(rd.nextInt(n));}
+//            Integer[] random_integers = list_random.toArray(new Integer[0]);
+//
+//            //arranged
+//            final List<Integer> list_arranged = new ArrayList<>();
+//            for (int i = 0; i < n; i++) {
+//                list_arranged.add(i+1);}
+//
+//            Integer[] sorted_integers = list_arranged.toArray(new Integer[0]);
+//
+//            //reverse
+//            final List<Integer> list_reverse = new ArrayList<>();
+//            for (int i = 0; i < n; i++) {
+//                list_reverse.add(n-i);
+//            }
+//
+//            Integer[] reverse_integers = list_reverse.toArray(new Integer[0]);
+//
+//            //partial
+//            final List<Integer> list_partial = new ArrayList<>();
+//            for (int i = 0; i < n; i++) {
+//                if(i>n/2) {
+//                    list_partial.add(rd.nextInt(n));
+//                }
+//                else {
+//                    list_partial.add(i);}}
+//
+//            Integer[] partial_integers = list_partial.toArray(new Integer[0]);
+//
+//            //Benchmarking
+//            //Random
+//            Benchmark<Boolean> bm_rand = new Benchmark_Timer<>(
+//                    "randomSort", b -> {
+//                is.sort(random_integers.clone(),0,random_integers.length);
+//
+//            });
+//            double x_rand = bm_rand.run(true, 10);
+//
+//            //arranged
+//            Benchmark<Boolean> bm_arranged = new Benchmark_Timer<>(
+//                    "arrangedSort", b -> {
+//                is.sort(sorted_integers.clone(),0, sorted_integers.length);
+//
+//            });
+//            double x_arranged = bm_arranged.run(true,  10);
+//
+//            //reverse
+//            Benchmark<Boolean> bm_reverse = new Benchmark_Timer<>(
+//                    "reverseSort", b -> {
+//                is.sort(reverse_integers.clone(),0,reverse_integers.length);
+//
+//            });
+//            double x_reverse = bm_reverse.run(true, 10);
+//
+//            //partial
+//            Benchmark<Boolean> bm_partial = new Benchmark_Timer<>(
+//                    "partialSort", b -> {
+//                is.sort(partial_integers.clone(),0,partial_integers.length);
+//
+//            });
+//            double x_partial = bm_partial.run(true, 10);
+//
+//
+//            System.out.println("Random: "+x_rand);
+//            System.out.println("Ordered: "+x_arranged);
+//            System.out.println("Reverse: "+x_reverse);
+//            System.out.println("Partial: "+x_partial);
+        radixBenchmark();
         }
+    public static void radixBenchmark()
+    {
+        radixSort rs = new radixSort();
+        long start = System.currentTimeMillis();
+        boolean alreadySorted = true;
+        String resource ="chinese_names.txt";
+        String[] pin = new String[0];
+        try {
+            pin = toEng.generateList(resource);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String[] chiToEng = new String[pin.length];
+
+        for (int i = 0; i < pin.length; i++) {
+            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+        }
+        int n = chiToEng.length;
+        rs.sort(chiToEng);
+        long end = System.currentTimeMillis();
+        Benchmark<Boolean> rsMSD = new Benchmark_Timer<>(
+                    "MSD Radix Sort", b -> {
+                rs.sort(chiToEng.clone());
+
+            });
+        double rs_sort = rsMSD.run(true, 10);
+        System.out.println("Array sorted with Radix Sort in :" + (end - start) + "ms");
+
     }
 
 }
+
