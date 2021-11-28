@@ -61,7 +61,6 @@ public class SortBenchmarkHelper {
         if (matcher.find()) {
             final String word = matcher.group(1);
             final String[] strings = word.split("[\\s\\p{Punct}\\uFF0C]");
-            System.out.println(strings.length);
             return Arrays.asList(strings);
         } else
             return new ArrayList<>();
