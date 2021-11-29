@@ -3,18 +3,20 @@ package edu.neu.coe.info6205.FinalProject;
 
 import edu.neu.coe.info6205.util.Benchmark;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
+import edu.neu.coe.info6205.util.Config;
 import edu.neu.coe.info6205.util.SortBenchmark;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class radixSort {
 
 
     private static final int R      = 256;
     private static final int CUTOFF =  15;
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         String resource="chinese_names.txt";
         String[] pin=toEng.generateList(resource);
         String[] chiToEng=new String[pin.length];
@@ -25,6 +27,7 @@ public class radixSort {
         int n = chiToEng.length;
         sort(chiToEng);
         System.out.println("\n");
+        radixBench(chiToEng);
 
     }
 
@@ -93,7 +96,12 @@ public class radixSort {
         return v.substring(d).compareTo(w.substring(d)) < 0;
     }
 
+    public static void radixBench(String[] arr) throws IOException {
+        Config config = Config.load(SortBenchmark.class);
+        SortBenchmark sb=new SortBenchmark(config);
+        sb.benchmarkStringSorters(arr,5000,5000);
 
 
+    }
 
 }

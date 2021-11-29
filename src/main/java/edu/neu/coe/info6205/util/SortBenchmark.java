@@ -3,7 +3,8 @@
  */
 package edu.neu.coe.info6205.util;
 
-import edu.neu.coe.info6205.sort.BaseHelper;
+import
+        edu.neu.coe.info6205.sort.BaseHelper;
 import edu.neu.coe.info6205.sort.Helper;
 import edu.neu.coe.info6205.sort.SortWithHelper;
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
@@ -27,6 +28,7 @@ import static edu.neu.coe.info6205.util.SortBenchmarkHelper.getWords;
 import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 
 public class SortBenchmark {
+
 
     public SortBenchmark(Config config) {
         this.config = config;
@@ -82,14 +84,14 @@ public class SortBenchmark {
         logger.info("Beginning String sorts");
 
         // NOTE: common words benchmark
-        benchmarkStringSorters(getWords("3000-common-words.txt", SortBenchmark::lineAsList), 4000, 5000);
+        benchmarkStringSorters(getWords("chinese_names.txt", SortBenchmark::lineAsList), 4000, 5000);
 
         // NOTE: Leipzig English words benchmarks (according to command-line arguments)
         wordCounts.forEach(this::doLeipzigBenchmarkEnglish);
 
 
         // NOTE: Leipzig Chines words benchmarks (according to command-line arguments)
-        doLeipzigBenchmark("zho-simp-tw_web_2014_10K-sentences.txt", 5000, 1000);
+        doLeipzigBenchmark("chinese_names.txt", 5000, 1000);
     }
 
     private void doLeipzigBenchmarkEnglish(int x) {
@@ -131,7 +133,7 @@ public class SortBenchmark {
      * @param nWords the number of words to be sorted.
      * @param nRuns  the number of runs.
      */
-    void benchmarkStringSorters(String[] words, int nWords, int nRuns) {
+    public void benchmarkStringSorters(String[] words, int nWords, int nRuns) {
         logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
         Random random = new Random();
 
@@ -159,11 +161,7 @@ public class SortBenchmark {
         // NOTE: this is very slow of course, so recommendation is not to enable this option.
         if (isConfigBenchmarkStringSorter("insertionsort"))
             runStringSortBenchmark(words, nWords, nRuns / 10, new InsertionSort<>(nWords, config), timeLoggersQuadratic);
-
     }
-
-
-
 
     /**
      * Method to run instrumented string sorter benchmarks.
