@@ -58,6 +58,8 @@ public class PureHuskySort<X extends Comparable<X>> {
             Arrays.sort(xs);
     }
 
+
+
     /**
      * Primary constructor.
      *
@@ -66,11 +68,14 @@ public class PureHuskySort<X extends Comparable<X>> {
      *                         NOTE: that even though we are using IntroSort, the random shuffle precaution is necessary when
      * @param useInsertionSort if true, then insertion sort will be used to mop up remaining inversions instead of system sort.
      */
-    public PureHuskySort(final HuskyCoder<X> huskyCoder, final boolean mayBeSorted, final boolean useInsertionSort) {
+
+
+    public PureHuskySort( HuskyCoder<X> huskyCoder, boolean mayBeSorted,  boolean useInsertionSort) {
         this.huskyCoder = huskyCoder;
         this.mayBeSorted = mayBeSorted;
         this.useInsertionSort = useInsertionSort;
     }
+
 
     // CONSIDER invoke method in IntroSort
     private static int floor_lg(final int a) {
@@ -218,9 +223,10 @@ public class PureHuskySort<X extends Comparable<X>> {
     // It would be like looking up aardvark in the dictionary using strict binary search.
     private static final boolean OPTIMIZED = false;
 
-    private final HuskyCoder<X> huskyCoder;
-    private final boolean mayBeSorted;
-    private final boolean useInsertionSort;
+     HuskyCoder<X> huskyCoder;
+     boolean mayBeSorted;
+     boolean useInsertionSort;
+     String[] arr;
 
     private final static LazyLogger logger = new LazyLogger(PureHuskySort.class);
 }

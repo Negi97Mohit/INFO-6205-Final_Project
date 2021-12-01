@@ -3,8 +3,11 @@
  */
 package edu.neu.coe.info6205.util;
 
-import
-        edu.neu.coe.info6205.sort.BaseHelper;
+import edu.neu.coe.info6205.FinalProject.radixSort;
+import edu.neu.coe.info6205.FinalProject.radixSortLSD;
+import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.toEng;
+import edu.neu.coe.info6205.sort.BaseHelper;
 import edu.neu.coe.info6205.sort.Helper;
 import edu.neu.coe.info6205.sort.SortWithHelper;
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
@@ -27,7 +30,7 @@ import static edu.neu.coe.info6205.util.SortBenchmarkHelper.generateRandomLocalD
 import static edu.neu.coe.info6205.util.SortBenchmarkHelper.getWords;
 import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 
-public class SortBenchmark {
+public class SortBenchmark{
 
 
     public SortBenchmark(Config config) {
@@ -36,12 +39,12 @@ public class SortBenchmark {
 
     public static void main(String[] args) throws IOException {
         Config config = Config.load(SortBenchmark.class);
-        logger.info("SortBenchmark.main: " + config.get("sortbenchmark", "version") + " with word counts: " + Arrays.toString(args));
-        if (args.length == 0) logger.warn("No word counts specified on the command line");
+//        logger.info("SortBenchmark.main: " + config.get("sortbenchmark", "version") + " with word counts: " + Arrays.toString(args));
+//        if (args.length == 0) logger.warn("No word counts specified on the command line");
         SortBenchmark benchmark = new SortBenchmark(config);
-        benchmark.sortIntegers(100000);
+//        benchmark.sortIntegers(100000);
         benchmark.sortStrings(Arrays.stream(args).map(Integer::parseInt));
-        benchmark.sortLocalDateTimes(100000, config);
+//        benchmark.sortLocalDateTimes(100000, config);
     }
 
 
@@ -87,11 +90,11 @@ public class SortBenchmark {
         benchmarkStringSorters(getWords("chinese_names.txt", SortBenchmark::lineAsList), 4000, 5000);
 
         // NOTE: Leipzig English words benchmarks (according to command-line arguments)
-        wordCounts.forEach(this::doLeipzigBenchmarkEnglish);
-
-
-        // NOTE: Leipzig Chines words benchmarks (according to command-line arguments)
-        doLeipzigBenchmark("chinese_names.txt", 5000, 1000);
+//        wordCounts.forEach(this::doLeipzigBenchmarkEnglish);
+//
+//
+//        // NOTE: Leipzig Chines words benchmarks (according to command-line arguments)
+//        doLeipzigBenchmark("chinese_names.txt", 5000, 1000);
     }
 
     private void doLeipzigBenchmarkEnglish(int x) {
@@ -133,34 +136,111 @@ public class SortBenchmark {
      * @param nWords the number of words to be sorted.
      * @param nRuns  the number of runs.
      */
-    public void benchmarkStringSorters(String[] words, int nWords, int nRuns) {
-        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
-        Random random = new Random();
+    public void benchmarkStringSorters(String[] words, int nWords, int nRuns) throws FileNotFoundException {
+//        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
+//        Random random = new Random();
 
-        if (isConfigBenchmarkStringSorter("puresystemsort")) {
-            Benchmark<String[]> benchmark = new Benchmark_Timer<>("SystemSort", null, Arrays::sort, null);
-            doPureBenchmark(words, nWords, nRuns, random, benchmark);
+        radixSortMSDB(getNames(), 500000,100);
+        radixSortLSDB(getNames(), 500000,100);
+
+
+//        if (isConfigBenchmarkStringSorter("puresystemsort")) {
+//            Benchmark<String[]> benchmark = new Benchmark_Timer<>("SystemSort", null, Arrays::sort, null);
+//            doPureBenchmark(words, nWords, nRuns, random, benchmark);
+//        }
+//
+//        if (isConfigBenchmarkStringSorter("mergesort")) {
+//            runMergeSortBenchmark(words, nWords, nRuns, false, false);
+//            runMergeSortBenchmark(words, nWords, nRuns, true, false);
+//            runMergeSortBenchmark(words, nWords, nRuns, false, true);
+//            runMergeSortBenchmark(words, nWords, nRuns, true, true);
+//        }
+//
+//        if (isConfigBenchmarkStringSorter("quicksort3way"))
+//            runStringSortBenchmark(words, nWords, nRuns, new QuickSort_3way<>(nWords, config), timeLoggersLinearithmic);
+//
+//        if (isConfigBenchmarkStringSorter("quicksort"))
+//            runStringSortBenchmark(words, nWords, nRuns, new QuickSort_DualPivot<>(nWords, config), timeLoggersLinearithmic);
+//
+//        if (isConfigBenchmarkStringSorter("introsort"))
+//            runStringSortBenchmark(words, nWords, nRuns, new IntroSort<>(nWords, config), timeLoggersLinearithmic);
+//
+//        // NOTE: this is very slow of course, so recommendation is not to enable this option.
+//        if (isConfigBenchmarkStringSorter("insertionsort"))
+//            runStringSortBenchmark(words, nWords, nRuns / 10, new InsertionSort<>(nWords, config), timeLoggersQuadratic);
+    }
+
+
+    /**
+     * Method to generate pinyin names.
+     *
+     */
+    public static String[] getNames() throws FileNotFoundException {
+        String resource="chinese_names.txt";
+        String[] pin= toEng.generateList(resource);
+        String[] chiToEng=new String[pin.length];
+        for (int i = 0; i < pin.length; i++) {
+            chiToEng[i] = regexMatch.getPingYin(pin[i]);
         }
+        return chiToEng;
+    }
 
-        if (isConfigBenchmarkStringSorter("mergesort")) {
-            runMergeSortBenchmark(words, nWords, nRuns, false, false);
-            runMergeSortBenchmark(words, nWords, nRuns, true, false);
-            runMergeSortBenchmark(words, nWords, nRuns, false, true);
-            runMergeSortBenchmark(words, nWords, nRuns, true, true);
+    public static void radixSortMSDB(String[] arr,int nwords,int runs){
+        logger.info("SortBenchmark MSD Radix Sort with word counts: " + nwords+ " with run count: "+runs);
+        radixSort rs=new radixSort();
+        final Timer timer = new Timer();
+        final int zzz = 20;
+        long start = Calendar.getInstance().getTimeInMillis();
+        long mean=0;
+        Random rand=new Random();
+        for (int i=1;i<=runs;i++){
+            long start1=Calendar.getInstance().getTimeInMillis();
+            String[] runTest=new String[nwords];
+            for(int j=0;j<nwords;j++) {
+                int index =  rand.nextInt(arr.length);
+                runTest[j] =arr[index];
+            }
+            rs.sort(runTest);
+            long end1=Calendar.getInstance().getTimeInMillis();
+            mean+=(end1-start1);
         }
+        long end = Calendar.getInstance().getTimeInMillis();
+        String diffTime=String.format("%,d", (end-start));
+        String meanTime=String.format("%,d", mean/runs);
+        logger.info("Total time MSD Radix Sort with word : " + nwords+ " with run : "+runs+" (ms): "+diffTime);
+        logger.info("SortBenchmark LSD Radix Sort with word counts: " + nwords+ " with run count: "+runs);
+        logger.info("Mean time MSD Radix Sort with word : " + nwords+ " with run : "+runs+" (ms): "+meanTime);
 
-        if (isConfigBenchmarkStringSorter("quicksort3way"))
-            runStringSortBenchmark(words, nWords, nRuns, new QuickSort_3way<>(nWords, config), timeLoggersLinearithmic);
+    }
 
-        if (isConfigBenchmarkStringSorter("quicksort"))
-            runStringSortBenchmark(words, nWords, nRuns, new QuickSort_DualPivot<>(nWords, config), timeLoggersLinearithmic);
+    public static void  radixSortLSDB(String[] arr,int nwords,int runs){
+        logger.info("SortBenchmark.MSD Radix Sort with word counts: " + nwords+ " with run count: "+runs);
+        radixSortLSD rs=new radixSortLSD();
+        long start = Calendar.getInstance().getTimeInMillis();
+        int min=0;
+        for (String word:arr) {
+            if(word.length()<min)
+                min=word.length();
+        }
+        long mean=0;
+        Random rand=new Random();
+        for (int i=1;i<=runs;i++){
+            long start1=Calendar.getInstance().getTimeInMillis();
+            String[] runTest=new String[nwords];
+            for(int j=0;j<nwords;j++) {
+                int index =  rand.nextInt(arr.length);
+                runTest[j] =arr[index];
+            }
+            rs.sort(runTest,min);
+            long end1=Calendar.getInstance().getTimeInMillis();
+            mean+=(end1-start1);
+        }
+        long end = Calendar.getInstance().getTimeInMillis();
+        String diffTime=String.format("%,d", (end-start));
+        String meanTime=String.format("%,d", mean/runs);
+        logger.info("Total time LSD Radix Sort with word : " + nwords+ " with run : "+runs+" (ms): "+diffTime);
+        logger.info("Mean time LSD Radix Sort with word : " + nwords+ " with run : "+runs+" (ms): "+meanTime);
 
-        if (isConfigBenchmarkStringSorter("introsort"))
-            runStringSortBenchmark(words, nWords, nRuns, new IntroSort<>(nWords, config), timeLoggersLinearithmic);
-
-        // NOTE: this is very slow of course, so recommendation is not to enable this option.
-        if (isConfigBenchmarkStringSorter("insertionsort"))
-            runStringSortBenchmark(words, nWords, nRuns / 10, new InsertionSort<>(nWords, config), timeLoggersQuadratic);
     }
 
     /**

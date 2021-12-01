@@ -44,7 +44,7 @@ public class Config {
     }
 
     public boolean getBoolean(String sectionName, String optionName) {
-        return true;//get(sectionName, optionName, boolean.class);
+        return get(sectionName, optionName, boolean.class);
     }
 
     public int getInt(final String sectionName, final String optionName, final int defaultValue) {
