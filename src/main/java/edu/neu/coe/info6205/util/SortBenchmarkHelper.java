@@ -50,7 +50,7 @@ public class SortBenchmarkHelper {
                 return s.length() >= MINIMUM_LENGTH;
             }
         }).collect(Collectors.toList());
-        logger.info("Testing with words: " + formatWhole(words.size()) + " from " + resource);
+//        logger.info("Testing with words: " + formatWhole(words.size()) + " from " + resource);
         String[] result = new String[words.size()];
         result = words.toArray(result);
         return result;

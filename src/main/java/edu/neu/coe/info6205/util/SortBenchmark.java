@@ -140,8 +140,11 @@ public class SortBenchmark{
 //        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
 //        Random random = new Random();
 
-        radixSortMSDB(getNames(), 500000,100);
-        radixSortLSDB(getNames(), 500000,100);
+        int[] words1={250000,500000,999998};
+        for(int word:words1) {
+            radixSortMSDB(getNames(), word, 100);
+            radixSortLSDB(getNames(), word, 100);
+        }
 
 
 //        if (isConfigBenchmarkStringSorter("puresystemsort")) {
@@ -207,10 +210,9 @@ public class SortBenchmark{
         long end = Calendar.getInstance().getTimeInMillis();
         String diffTime=String.format("%,d", (end-start));
         String meanTime=String.format("%,d", mean/runs);
-        logger.info("Total time MSD Radix Sort with word : " + nwords+ " with run : "+runs+" (ms): "+diffTime);
-        logger.info("SortBenchmark LSD Radix Sort with word counts: " + nwords+ " with run count: "+runs);
-        logger.info("Mean time MSD Radix Sort with word : " + nwords+ " with run : "+runs+" (ms): "+meanTime);
-
+            logger.info("Total time MSD Radix Sort with word : " + nwords + " with run : " + runs + " (ms): " + diffTime);
+            logger.info("SortBenchmark LSD Radix Sort with word counts: " + nwords + " with run count: " + runs);
+            logger.info("Mean time MSD Radix Sort with word : " + nwords + " with run : " + runs + " (ms): " + meanTime);
     }
 
     public static void  radixSortLSDB(String[] arr,int nwords,int runs){
