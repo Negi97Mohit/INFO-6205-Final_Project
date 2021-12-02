@@ -19,6 +19,8 @@ public class radixSort {
     public static void main(String[] args) throws IOException {
         String resource="chinese_names.txt";
         String[] pin=toEng.generateList(resource);
+        System.out.println("PIN");
+        System.out.println(pin);
         String[] chiToEng=new String[pin.length];
 
         for (int i = 0; i < pin.length; i++) {
