@@ -3,7 +3,7 @@ package edu.neu.coe.info6205.FinalProject;
 import edu.neu.coe.info6205.graphs.BFS_and_prims.StdRandom;
 
 
-public class DualPivot<X extends Comparable<X>>   {
+public class DualPivot<X extends Comparable<X>>  extends  Sort {
 
     private static void show(String[] a) {
         for (int i = 0; i < a.length; i++) {
@@ -12,7 +12,7 @@ public class DualPivot<X extends Comparable<X>>   {
     }
 
 
-    public static void sort(String[] a) {
+    public  void sort(String[] a) {
         StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
         assert isSorted(a);
@@ -113,7 +113,7 @@ public class DualPivot<X extends Comparable<X>>   {
 //        Partition<X> send = new Partition<X>(arr, 0, arr.size());
 //      -------------------------------------------------------------------------------------
 
-        DualPivot.sort(chiToEng);
+        new DualPivot().sort(chiToEng);
         show(chiToEng);
 
     }

@@ -328,6 +328,7 @@ public class SortBenchmark {
             sortBenchmark(new radixSort(), getNames(), word, 100);
             sortBenchmark(new radixSortLSD(), getNames(), word, 100);
             sortBenchmark(new TimSort(), getNames(), word, 100);
+            sortBenchmark(new DualPivot(), getNames(), word, 100);
         }
 
 
