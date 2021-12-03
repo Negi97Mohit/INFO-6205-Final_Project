@@ -1,12 +1,7 @@
 package edu.neu.coe.info6205.FinalProject;
 
 import edu.neu.coe.info6205.graphs.BFS_and_prims.StdRandom;
-import edu.neu.coe.info6205.sort.linearithmic.Partition;
-import edu.neu.coe.info6205.sort.linearithmic.QuickSort;
 
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class DualPivot<X extends Comparable<X>>   {
 

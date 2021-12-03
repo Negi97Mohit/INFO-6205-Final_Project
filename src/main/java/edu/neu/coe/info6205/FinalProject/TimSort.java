@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-public class TimSort<T extends Comparable<? super T>> {
+public class TimSort<T extends Comparable<? super T>> extends Sort {
 
     private final int CONST_FOR_GALOP = 7;
     /**
@@ -31,15 +31,8 @@ public class TimSort<T extends Comparable<? super T>> {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
         }
 
-        int count = 0;
-
         TimSort ts =new TimSort();
-        resChiToEng = (String[]) ts.sort(chiToEng);
-        for (String ss : chiToEng) {
-            System.out.println(ss+"  " + resChiToEng[count]);
-            count++;
-        }
-
+        ts.sort(chiToEng);
     }
 
     /**
@@ -48,14 +41,14 @@ public class TimSort<T extends Comparable<? super T>> {
      * @param array of T objects
      * @return sorted array
      */
-    public T[] sort(T[] array) {
+    public void sort(T[] array) {
         assert (array != null);
         this.array = array;
         stack = new Stack<PairOfSubarray>();
         minrun = getMinrun();
         prepareArray();
         mergeInside();
-        return array;
+//        return array;
     }
 
     /**
@@ -142,6 +135,8 @@ public class TimSort<T extends Comparable<? super T>> {
      * @param p1 describes first array
      * @param p2 describes second array
      */
+
+
     private void mergeStackArrays(PairOfSubarray p1, PairOfSubarray p2) {
         assert (array.getClass().getComponentType() != null);
         @SuppressWarnings("unchecked")

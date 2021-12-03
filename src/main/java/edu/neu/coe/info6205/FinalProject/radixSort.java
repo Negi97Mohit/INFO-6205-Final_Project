@@ -1,17 +1,12 @@
 package edu.neu.coe.info6205.FinalProject;
 
 
-import edu.neu.coe.info6205.util.Benchmark;
-import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.Config;
 import edu.neu.coe.info6205.util.SortBenchmark;
 
-import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
-public class radixSort {
+public class radixSort extends Sort{
 
 
     private static final int R      = 256;
@@ -27,7 +22,7 @@ public class radixSort {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
-        sort(chiToEng);
+        new radixSort().sort(chiToEng);
         System.out.println("\n");
         radixBench(chiToEng);
 
@@ -40,10 +35,10 @@ public class radixSort {
         System.out.println();
     }
 
-    public static void sort(String[] a) {
+    public void sort(String[] a) {
         int N = a.length;
         String[] aux = new String[N];
-        sort(a, 0, N-1, 0, aux);
+        partition(a, 0, N-1, 0, aux);
     }
 
     private static int charAt(String s, int d) {
@@ -52,7 +47,7 @@ public class radixSort {
         return s.charAt(d);
     }
 
-    private static void sort(String[] a, int lo, int hi, int d, String[] aux) {
+    private static void partition(String[] a, int lo, int hi, int d, String[] aux) {
 
         if (hi <= lo + CUTOFF) {
             insertion(a, lo, hi, d);
@@ -78,7 +73,7 @@ public class radixSort {
 
 
         for (int r = 0; r < R; r++)
-            sort(a, lo + count[r], lo + count[r+1] - 1, d+1, aux);
+            partition(a, lo + count[r], lo + count[r+1] - 1, d+1, aux);
     }
 
     private static void insertion(String[] a, int lo, int hi, int d) {
