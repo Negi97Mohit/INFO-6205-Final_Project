@@ -1,18 +1,20 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.toEng;
+import edu.neu.coe.info6205.FinalProject.chiToEng;
 
 import java.io.FileNotFoundException;
+import java.util.concurrent.ForkJoinPool;
 
 public class radixSortLSD<X extends Comparable<X>> extends Sort {
-
+    public static int threadCount=1;
+    static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
     private static final int BITS_PER_BYTE = 8;
     private static int w;
 
     public static void main(String[] args) throws FileNotFoundException {
         String resource = "chinese_names.txt";
-        String[] pin = toEng.generateList(resource);
+        String[] pin = chiToEng.generateList(resource);
         String[] chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);

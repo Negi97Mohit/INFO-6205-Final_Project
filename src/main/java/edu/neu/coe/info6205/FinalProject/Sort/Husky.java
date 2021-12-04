@@ -3,7 +3,7 @@ package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.Utils.ChineseComparator;
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.toEng;
+import edu.neu.coe.info6205.FinalProject.chiToEng;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,9 +11,12 @@ import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.concurrent.ForkJoinPool;
 
 
 public class Husky extends Sort {
+    public static int threadCount=1;
+    static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
     public int byteAt(byte[] s, int d)
     {
         if (d < s.length) return s[d]&0xFF; // when doing msd the right part of array seems not important ?
@@ -71,7 +74,7 @@ public class Husky extends Sort {
     public static void main(String[] args) throws IOException {
         ChineseComparator y=new ChineseComparator();
         String resource="chinese_names.txt";
-        String[] pin= toEng.generateList(resource);
+        String[] pin= chiToEng.generateList(resource);
         String[] chiToEng=new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
@@ -79,8 +82,5 @@ public class Husky extends Sort {
         int n = chiToEng.length;
         Husky e=new Husky();
         e.sort(chiToEng);
-        Arrays.sort(pin,(x1, x2)-> y.compare(x1,x2));
-        double correct=0;
-        System.out.println("Husky Sort Performed");
     }
 }

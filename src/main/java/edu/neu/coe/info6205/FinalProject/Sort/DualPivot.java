@@ -1,12 +1,15 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.toEng;
+import edu.neu.coe.info6205.FinalProject.chiToEng;
 import edu.neu.coe.info6205.graphs.BFS_and_prims.StdRandom;
+
+import java.util.concurrent.ForkJoinPool;
 
 
 public class DualPivot<X extends Comparable<X>>  extends Sort {
-
+    public static int threadCount=1;
+    static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
     private static void show(String[] a) {
         for (int i = 0; i < a.length; i++) {
             System.out.println(a[i]);
@@ -85,7 +88,7 @@ public class DualPivot<X extends Comparable<X>>  extends Sort {
     public static void main(String[] args) throws Exception {
 
         String resource = "chinese_names.txt";
-        String[] pin = toEng.generateList(resource);
+        String[] pin = chiToEng.generateList(resource);
         System.out.println("PIN");
         System.out.println(pin);
         String[] chiToEng = new String[pin.length];

@@ -1,15 +1,17 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.toEng;
+import edu.neu.coe.info6205.FinalProject.chiToEng;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Stack;
+import java.util.concurrent.ForkJoinPool;
 import java.util.stream.IntStream;
 
 public class timSort<T extends Comparable<? super T>> extends Sort {
-
+    public static int threadCount=1;
+    static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
     private final int CONST_FOR_GALOP = 7;
     /**
      * Initial array.
@@ -26,7 +28,7 @@ public class timSort<T extends Comparable<? super T>> extends Sort {
 
     public static void main(String[] args) throws IOException {
         String resource = "chinese_names.txt";
-        String[] pin = toEng.generateList(resource);
+        String[] pin = chiToEng.generateList(resource);
         String[] chiToEng = new String[pin.length];
         String[] resChiToEng = new String[pin.length];
 

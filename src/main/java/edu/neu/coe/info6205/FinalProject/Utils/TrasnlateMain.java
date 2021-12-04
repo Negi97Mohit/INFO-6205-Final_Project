@@ -26,9 +26,8 @@ public class TrasnlateMain {
 
     /**
      * Sends out a WhatsApp message via WhatsMate WA Gateway.
-     * @return
      */
-    public static String translate(String fromLang, String toLang, String text) throws Exception {
+    public static void translate(String fromLang, String toLang, String text) throws Exception {
         // TODO: Should have used a 3rd party library to make a JSON string from an object
         String jsonPayload = new StringBuilder()
                 .append("{")
@@ -58,16 +57,15 @@ public class TrasnlateMain {
         os.close();
 
         int statusCode = conn.getResponseCode();
-//        System.out.println("Status Code: " + statusCode);
+        System.out.println("Status Code: " + statusCode);
         BufferedReader br = new BufferedReader(new InputStreamReader(
                 (statusCode == 200) ? conn.getInputStream() : conn.getErrorStream()
         ));
         String output;
         while ((output = br.readLine()) != null) {
-//            System.out.println(output);
+            System.out.println(output);
         }
         conn.disconnect();
-        return output;
     }
 
 }
