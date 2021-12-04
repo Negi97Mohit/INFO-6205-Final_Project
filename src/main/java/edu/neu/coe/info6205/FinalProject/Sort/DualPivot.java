@@ -1,9 +1,11 @@
-package edu.neu.coe.info6205.FinalProject;
+package edu.neu.coe.info6205.FinalProject.Sort;
 
+import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.toEng;
 import edu.neu.coe.info6205.graphs.BFS_and_prims.StdRandom;
 
 
-public class DualPivot<X extends Comparable<X>>  extends  Sort {
+public class DualPivot<X extends Comparable<X>>  extends Sort {
 
     private static void show(String[] a) {
         for (int i = 0; i < a.length; i++) {

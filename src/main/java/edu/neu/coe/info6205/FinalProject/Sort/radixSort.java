@@ -1,30 +1,46 @@
-package edu.neu.coe.info6205.FinalProject;
+package edu.neu.coe.info6205.FinalProject.Sort;
 
 
+import edu.neu.coe.info6205.FinalProject.Utils.TrasnlateMain;
+import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.toEng;
 import edu.neu.coe.info6205.util.Config;
 import edu.neu.coe.info6205.util.SortBenchmark;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
-public class radixSort extends Sort{
+public class radixSort extends Sort {
 
 
     private static final int R      = 256;
     private static final int CUTOFF =  15;
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         String resource="chinese_names.txt";
-        String[] pin=toEng.generateList(resource);
-        System.out.println("PIN");
-        System.out.println(pin);
+        String[] pin= toEng.generateList(resource);
         String[] chiToEng=new String[pin.length];
-
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
+        System.out.printf("Before Sorting");
         new radixSort().sort(chiToEng);
-        System.out.println("\n");
-        radixBench(chiToEng);
+        TrasnlateMain ts=new TrasnlateMain();
+        System.out.println("Started translating");
+        for(int i=0;i<chiToEng.length;i++){
+            chiToEng[i]=ts.translate("en","zh-CN",chiToEng[i]);
+        }
+        System.out.println("Writing to file");
+        BufferedWriter br = new BufferedWriter(new FileWriter("myfile.csv"));
+        StringBuilder sb = new StringBuilder();
+// Append strings from array
+        for (String element : chiToEng) {
+            sb.append(element);
+            sb.append(",");
+        }
+        br.write(sb.toString());
+        br.close();
 
     }
 

@@ -1,11 +1,14 @@
-package edu.neu.coe.info6205.FinalProject;
+package edu.neu.coe.info6205.FinalProject.Sort;
+
+import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.toEng;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-public class TimSort<T extends Comparable<? super T>> extends Sort {
+public class timSort<T extends Comparable<? super T>> extends Sort {
 
     private final int CONST_FOR_GALOP = 7;
     /**
@@ -31,7 +34,7 @@ public class TimSort<T extends Comparable<? super T>> extends Sort {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
         }
 
-        TimSort ts =new TimSort();
+        timSort ts =new timSort();
         ts.sort(chiToEng);
     }
 

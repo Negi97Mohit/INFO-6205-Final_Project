@@ -1,4 +1,4 @@
-package edu.neu.coe.info6205.FinalProject;
+package edu.neu.coe.info6205.FinalProject.Sort;
 
 
 public class Insertion {

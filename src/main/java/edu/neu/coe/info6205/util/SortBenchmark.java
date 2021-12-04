@@ -3,7 +3,7 @@
  */
 package edu.neu.coe.info6205.util;
 
-import edu.neu.coe.info6205.FinalProject.TimSort;
+import edu.neu.coe.info6205.FinalProject.Sort.*;
 import edu.neu.coe.info6205.FinalProject.*;
 import edu.neu.coe.info6205.sort.BaseHelper;
 import edu.neu.coe.info6205.sort.Helper;
@@ -327,8 +327,9 @@ public class SortBenchmark {
 //            radixSortLSDB(getNames(), word, 100);
             sortBenchmark(new radixSort(), getNames(), word, 100);
             sortBenchmark(new radixSortLSD(), getNames(), word, 100);
-            sortBenchmark(new TimSort(), getNames(), word, 100);
+            sortBenchmark(new timSort(), getNames(), word, 100);
             sortBenchmark(new DualPivot(), getNames(), word, 100);
+            sortBenchmark(new Husky(), getNames(),word,100);
         }
 
 
@@ -358,7 +359,7 @@ public class SortBenchmark {
 //            runStringSortBenchmark(words, nWords, nRuns / 10, new InsertionSort<>(nWords, config), timeLoggersQuadratic);
     }
 
-    private void sortBenchmark(Sort ss, String[] arr, int nwords, int runs) {
+    private void sortBenchmark(Sort ss, String[] arr, int nwords, int runs) throws IOException {
         String className = ss.getClass().toString().substring(ss.getClass().toString().lastIndexOf('.') + 1, ss.getClass().toString().length());
         logger.info("SortBenchmark " + className + " with word counts: " + nwords + " with run count: " + runs);
 //        Sort rs= ss;
