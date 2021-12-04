@@ -320,7 +320,7 @@ public class SortBenchmark {
 //        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
 //        Random random = new Random();
 
-        int[] words1 = {250000, 500000, 999998};
+        int[] words1 = {250000, 500000, 1000000, 2000000, 4000000};
 
         for (int word : words1) {
 //            radixSortMSDB(getNames(), word, 100);
