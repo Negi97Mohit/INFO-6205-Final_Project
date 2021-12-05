@@ -2,7 +2,6 @@ package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 import edu.neu.coe.info6205.FinalProject.RegexMatch;
-import edu.neu.coe.info6205.FinalProject.Sorting_Multithreading.EngtoChi;
 import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
 
 import java.io.BufferedWriter;
