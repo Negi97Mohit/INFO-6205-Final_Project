@@ -2,9 +2,12 @@ package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
+import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
 
 import java.io.FileNotFoundException;
 import java.util.concurrent.ForkJoinPool;
+
+import static edu.neu.coe.info6205.util.SortBenchmark.logger;
 
 public class RadixSortLSD<X extends Comparable<X>> extends Sort {
     public static int threadCount=1;
@@ -19,7 +22,6 @@ public class RadixSortLSD<X extends Comparable<X>> extends Sort {
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
-
         int min = 10;
         for (String word : chiToEng) {
             if (word.length() < min)
@@ -29,9 +31,8 @@ public class RadixSortLSD<X extends Comparable<X>> extends Sort {
         w = min;
         for (int i = 0; i < n; i++)
             assert chiToEng[i].length() == w : "String same length";
-
         new RadixSortLSD().sort(chiToEng);
-
+        logger.info("Radix MSD Sort Completed");
     }
 
     public void sort(String[] a) {

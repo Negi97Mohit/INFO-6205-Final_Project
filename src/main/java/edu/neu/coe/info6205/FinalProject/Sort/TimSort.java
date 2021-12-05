@@ -58,6 +58,7 @@ public class TimSort<T extends Comparable<? super T>> {
         String[] beSort = new String[chiToEng.length];
         for(int i=0;i<chiToEng.length;i++){
             beSort[i]=chiToEng[i];
+
         }
         logger.info("Starting of Tim Sort");
         new TimSort().sort(chiToEng);
@@ -73,7 +74,6 @@ public class TimSort<T extends Comparable<? super T>> {
         br.write(sb.toString());
         br.close();
     }
-
 
     public T[] sort(T[] array) {
         assert (array != null);
