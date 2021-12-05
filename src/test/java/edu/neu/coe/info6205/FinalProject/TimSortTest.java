@@ -18,9 +18,9 @@ public class TimSortTest extends TestCase {
 
     @Test
     public void testSort1() throws IOException {
-        String[] word = {"阿安", "阿安", "阿彬", "阿彬", "阿兵", "阿兵", "阿冰冰`", "阿婵", "阿超"};
+        String[] word = { "阿安", "阿彬", "阿斌", "阿滨", "阿兵", "阿冰", "阿冰冰"};
         TimSort ts = new TimSort();
-//        radixSortMSD rMSD = new radixSortMSD();
+
         String resource = "chinese_names.txt";
         String[] pin = ChineseToEnglish.generateList(resource);
         chiToEng = new String[pin.length];
@@ -32,12 +32,11 @@ public class TimSortTest extends TestCase {
         String[] res = new String[word.length];
         for (int i = 0; i < word.length; i++)
             res[i] = chiToEng[i];
-        boolean testStatus = false;
-        for (int i = 0; i < word.length; i++) {
-            if (res[i].equals(word[i]) == false)
-                testStatus = false;
-            else
-                testStatus = true;
+
+        for(int i=0;i< word.length;i++)
+            System.out.println(res[i] +" "+ regexMatch.getPingYin(word[i]) + " " +word[i]);
+        for (int i=0;i<word.length;i++){
+            assertEquals( res[i], regexMatch.getPingYin(word[i]));
         }
 
     }
