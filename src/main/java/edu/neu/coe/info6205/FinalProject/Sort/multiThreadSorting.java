@@ -20,7 +20,7 @@ public class multiThreadSorting {
             for (int word : words1) {
                 SortBenchmark.sortBenchmark(new radixSortMSD(), getNames(), word, 100);
                 SortBenchmark.sortBenchmark(new radixSortLSD(), getNames(), word, 100);
-                SortBenchmark.sortBenchmark(new timSort(), getNames(), word, 100);
+//                SortBenchmark.sortBenchmark(new TimSort(), getNames(), word, 100);
                 SortBenchmark.sortBenchmark(new DualPivot(), getNames(), word, 100);
                 SortBenchmark.sortBenchmark(new Husky(), getNames(), word, 100);
             }
