@@ -320,8 +320,8 @@ public class SortBenchmark {
     public void benchmarkStringSorters(String[] words, int nWords, int nRuns) throws IOException {
 //        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
 //        Random random = new Random();
-        int[] runner={1,50,100};
-        int[] words1 = {250000, 500000, 999998};
+        int[] runner={100,200,400,800};
+        int[] words1 = {250000, 500000, 1000000,2000000,4000000};
         for(int runs:runner) {
             for (int word : words1) {
 //            radixSortMSDB(getNames(), word, 100);
