@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * @author MNegi
  */
 
-public class regexMatch {
+public class RegexMatch {
     public boolean checkRex(char input) {
 
         // String to be scanned to find the pattern.

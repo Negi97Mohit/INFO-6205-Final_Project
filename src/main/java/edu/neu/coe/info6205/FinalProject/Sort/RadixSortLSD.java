@@ -1,12 +1,12 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.FileNotFoundException;
 import java.util.concurrent.ForkJoinPool;
 
-public class radixSortLSD<X extends Comparable<X>> extends Sort {
+public class RadixSortLSD<X extends Comparable<X>> extends Sort {
     public static int threadCount=1;
     static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
     private static final int BITS_PER_BYTE = 8;
@@ -17,7 +17,7 @@ public class radixSortLSD<X extends Comparable<X>> extends Sort {
         String[] pin = ChineseToEnglish.generateList(resource);
         String[] chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
 
         int min = 10;
@@ -30,7 +30,7 @@ public class radixSortLSD<X extends Comparable<X>> extends Sort {
         for (int i = 0; i < n; i++)
             assert chiToEng[i].length() == w : "String same length";
 
-        new radixSortLSD().sort(chiToEng);
+        new RadixSortLSD().sort(chiToEng);
 
     }
 

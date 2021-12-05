@@ -4,8 +4,8 @@
 
 package edu.neu.coe.info6205.util;
 
-import edu.neu.coe.info6205.FinalProject.Sort.radixSortMSD;
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.Sort.RadixSortMSD;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.FileNotFoundException;
@@ -217,7 +217,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
         }
     public static void radixBenchmark()
     {
-        radixSortMSD rs = new radixSortMSD();
+        RadixSortMSD rs = new RadixSortMSD();
         long start = System.currentTimeMillis();
         boolean alreadySorted = true;
         String resource ="chinese_names.txt";
@@ -230,7 +230,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
         String[] chiToEng = new String[pin.length];
 
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
         rs.sort(chiToEng);

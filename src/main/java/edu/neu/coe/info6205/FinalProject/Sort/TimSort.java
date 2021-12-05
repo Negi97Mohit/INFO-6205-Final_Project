@@ -1,8 +1,8 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
-import edu.neu.coe.info6205.FinalProject.Utils.engToChi;
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -52,17 +52,22 @@ public class TimSort<T extends Comparable<? super T>> {
         String[] resChiToEng = new String[pin.length];
 
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
+        }
+
+//        TimSort ts =new TimSort();
+        new TimSort().sort(chiToEng);
+        for (int i = 0; i < chiToEng.length; i++) {
+            System.out.println(chiToEng[i]);
         }
         String[] beSort = new String[chiToEng.length];
-        for(int i=0;i<chiToEng.length;i++){
-            beSort[i]=chiToEng[i];
-        }
-        logger.info("Starting of Tim Sort");
-        new TimSort().sort(chiToEng);
-        engToChi eng = new engToChi();
+        for (int i = 0; i < chiToEng.length; i++)
+            beSort[i] = chiToEng[i];
+        logger.info("Starting MSD Radix Sort");
+        new RadixSortMSD().sort(chiToEng);
+        EnglishToChinese eng = new EnglishToChinese();
         String[] res = eng.swapper(pin, beSort, chiToEng);
-        logger.info("Writing output to TimSortResult.csv");
+        System.out.println("Writing to file");
         BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/TimSortResult.csv"));
         StringBuilder sb = new StringBuilder();
         for (String element : res) {
