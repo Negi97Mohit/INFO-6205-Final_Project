@@ -18,11 +18,11 @@ public class multiThreadSorting {
             SortBenchmark.threadCount=thread;
             SortBenchmark.threadFJP=new ForkJoinPool(SortBenchmark.threadCount);
             for (int word : words1) {
-                SortBenchmark.sortBenchmark(new radixSortMSD(), getNames(), word, 100);
-                SortBenchmark.sortBenchmark(new radixSortLSD(), getNames(), word, 100);
-//                SortBenchmark.sortBenchmark(new TimSort(), getNames(), word, 100);
-                SortBenchmark.sortBenchmark(new DualPivot(), getNames(), word, 100);
-                SortBenchmark.sortBenchmark(new Husky(), getNames(), word, 100);
+                SortBenchmark.sortBenchmark(new radixSortMSD(), getNames(), word, 10);
+                SortBenchmark.sortBenchmark(new radixSortLSD(), getNames(), word, 10);
+                SortBenchmark.sortBenchmarkTim(new TimSort(), getNames(), word, 10);
+                SortBenchmark.sortBenchmark(new DualPivot(), getNames(), word, 10);
+                SortBenchmark.sortBenchmark(new Husky(), getNames(), word, 1);
             }
         }
     }
