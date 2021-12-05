@@ -1,7 +1,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class DualPivotTest extends TestCase {
         String[] pin = ChineseToEnglish.generateList(resource);
         chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
         dp.sort(chiToEng);
@@ -34,9 +34,9 @@ public class DualPivotTest extends TestCase {
         for (int i = 0; i < word.length; i++)
             res[i] = chiToEng[i];
         for(int i=0;i< word.length;i++)
-            System.out.println(res[i] +" "+ regexMatch.getPingYin(word[i]) + " " +word[i]);
+            System.out.println(res[i] +" "+ RegexMatch.getPingYin(word[i]) + " " +word[i]);
         for (int i=0;i<word.length;i++){
-            assertEquals( res[i], regexMatch.getPingYin(word[i]));
+            assertEquals( res[i], RegexMatch.getPingYin(word[i]));
         }
 
 

@@ -1,6 +1,6 @@
 package edu.neu.coe.info6205.FinalProject.Utils;
 
-class binarySearch {
+class BinarySearch {
     static int binarySearch(String[] arr, String x)
     {
         int l = 0, r = arr.length - 1;

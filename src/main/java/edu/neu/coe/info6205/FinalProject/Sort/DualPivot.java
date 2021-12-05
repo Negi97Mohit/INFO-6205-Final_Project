@@ -1,7 +1,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
-import edu.neu.coe.info6205.FinalProject.Utils.engToChi;
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 import edu.neu.coe.info6205.graphs.BFS_and_prims.StdRandom;
 
@@ -99,7 +99,7 @@ public class DualPivot<X extends Comparable<X>>  extends Sort {
         String[] chiToEng = new String[pin.length];
 
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
         int count = 0;
         for (String da : chiToEng) {
@@ -133,8 +133,8 @@ public class DualPivot<X extends Comparable<X>>  extends Sort {
         for (int i = 0; i < chiToEng.length; i++)
             beSort[i] = chiToEng[i];
         logger.info("Starting MSD Radix Sort");
-        new radixSortMSD().sort(chiToEng);
-        engToChi eng = new engToChi();
+        new RadixSortMSD().sort(chiToEng);
+        EnglishToChinese eng = new EnglishToChinese();
         String[] res = eng.swapper(pin, beSort, chiToEng);
         System.out.println("Writing to file");
         BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/DualPivotResult.csv"));

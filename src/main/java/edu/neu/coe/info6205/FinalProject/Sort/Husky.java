@@ -2,7 +2,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.Utils.ChineseComparator;
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.ByteArrayOutputStream;
@@ -77,7 +77,7 @@ public class Husky extends Sort {
         String[] pin= ChineseToEnglish.generateList(resource);
         String[] chiToEng=new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
         Husky e=new Husky();

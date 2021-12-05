@@ -81,14 +81,14 @@ public class SortBenchmark {
         String[] pin = ChineseToEnglish.generateList(resource);
         String[] chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
         return chiToEng;
     }
 
     public static void radixSortMSDB(String[] arr, int nwords, int runs) {
         logger.info("SortBenchmark MSD Radix Sort with word counts: " + nwords + " with run count: " + runs);
-        radixSortMSD rs = new radixSortMSD();
+        RadixSortMSD rs = new RadixSortMSD();
         final Timer timer = new Timer();
         final int zzz = 20;
         long start = Calendar.getInstance().getTimeInMillis();
@@ -115,7 +115,7 @@ public class SortBenchmark {
 
     public static void radixSortLSDB(String[] arr, int nwords, int runs) {
         logger.info("SortBenchmark.MSD Radix Sort with word counts: " + nwords + " with run count: " + runs);
-        radixSortLSD rs = new radixSortLSD();
+        RadixSortLSD rs = new RadixSortLSD();
         long start = Calendar.getInstance().getTimeInMillis();
         int min = 0;
         for (String word : arr) {
@@ -326,8 +326,8 @@ public class SortBenchmark {
             for (int word : words1) {
 //            radixSortMSDB(getNames(), word, 100);
 //            radixSortLSDB(getNames(), word, 100);
-                sortBenchmark(new radixSortMSD(), getNames(), word,runs);
-                sortBenchmark(new radixSortLSD(), getNames(), word,runs);
+                sortBenchmark(new RadixSortMSD(), getNames(), word,runs);
+                sortBenchmark(new RadixSortLSD(), getNames(), word,runs);
                 sortBenchmarkTim(new TimSort(), getNames(), word,runs);
                 sortBenchmark(new DualPivot(), getNames(), word, runs);
                 sortBenchmark(new Husky(), getNames(), word, runs);

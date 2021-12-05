@@ -1,20 +1,17 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 
-import edu.neu.coe.info6205.FinalProject.Utils.engToChi;
-import edu.neu.coe.info6205.FinalProject.regexMatch;
+import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
+import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
-import edu.neu.coe.info6205.util.Config;
-import edu.neu.coe.info6205.util.SortBenchmark;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.concurrent.ForkJoinPool;
 
 import static edu.neu.coe.info6205.util.SortBenchmark.logger;
 
-public class radixSortMSD extends Sort {
+public class RadixSortMSD extends Sort {
 
     public static int threadCount=1;
     static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
@@ -25,15 +22,15 @@ public class radixSortMSD extends Sort {
         String[] pin= ChineseToEnglish.generateList(resource);
         String[] chiToEng=new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
-            chiToEng[i] = regexMatch.getPingYin(pin[i]);
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
         String[] beSort=new String[chiToEng.length];
         for(int i=0;i<n;i++)
             beSort[i]=chiToEng[i];
         logger.info("Starting MSD Radix Sort");
-        new radixSortMSD().sort(chiToEng);
-        engToChi eng=new engToChi();
+        new RadixSortMSD().sort(chiToEng);
+        EnglishToChinese eng=new EnglishToChinese();
         String[] res=eng.swapper(pin,beSort,chiToEng);
         System.out.println("Writing to file");
         BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/Result.csv"));
