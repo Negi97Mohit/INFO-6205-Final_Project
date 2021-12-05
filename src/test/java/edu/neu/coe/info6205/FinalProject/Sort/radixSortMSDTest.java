@@ -1,6 +1,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
+import edu.neu.coe.info6205.FinalProject.Utils.engToChi;
 import edu.neu.coe.info6205.FinalProject.regexMatch;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class radixSortMSDTest extends TestCase {
 
     @Test
     public void testSort() throws FileNotFoundException {
-        String[] word={"阿安","阿安","阿彬","阿彬","阿兵","阿兵","阿冰冰`","阿婵","阿超"};
+        String[] word = { "阿安", "阿彬", "阿斌", "阿滨", "阿兵", "阿冰", "阿冰冰"};
         radixSortMSD rMSD = new radixSortMSD();
         String resource="chinese_names.txt";
         String[] pin= ChineseToEnglish.generateList(resource);
@@ -29,12 +30,15 @@ public class radixSortMSDTest extends TestCase {
         String[] res=new String[word.length];
         for(int i=0;i<word.length;i++)
             res[i]=chiToEng[i];
-        boolean testStatus=false;
+
+        String[] beSort=new String[chiToEng.length];
+        for(int i=0;i<n;i++)
+            beSort[i]=chiToEng[i];
+
+        for(int i=0;i< word.length;i++)
+            System.out.println(res[i] +" "+ regexMatch.getPingYin(word[i]) + " " +word[i]);
         for (int i=0;i<word.length;i++){
-            if (res[i].equals(word[i])==false)
-                testStatus=false;
-            else
-                testStatus=true;
+                assertEquals( res[i], regexMatch.getPingYin(word[i]));
         }
 
     }
