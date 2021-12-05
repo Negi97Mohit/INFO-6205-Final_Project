@@ -1,7 +1,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.chiToEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 import edu.neu.coe.info6205.graphs.BFS_and_prims.StdRandom;
 
 import java.util.concurrent.ForkJoinPool;
@@ -88,7 +88,7 @@ public class DualPivot<X extends Comparable<X>>  extends Sort {
     public static void main(String[] args) throws Exception {
 
         String resource = "chinese_names.txt";
-        String[] pin = chiToEng.generateList(resource);
+        String[] pin = ChineseToEnglish.generateList(resource);
         System.out.println("PIN");
         System.out.println(pin);
         String[] chiToEng = new String[pin.length];

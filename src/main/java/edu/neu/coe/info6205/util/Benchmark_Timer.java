@@ -6,7 +6,7 @@ package edu.neu.coe.info6205.util;
 
 import edu.neu.coe.info6205.FinalProject.Sort.radixSortMSD;
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.chiToEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.FileNotFoundException;
 import java.util.function.Consumer;
@@ -223,7 +223,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
         String resource ="chinese_names.txt";
         String[] pin = new String[0];
         try {
-            pin = chiToEng.generateList(resource);
+            pin = ChineseToEnglish.generateList(resource);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

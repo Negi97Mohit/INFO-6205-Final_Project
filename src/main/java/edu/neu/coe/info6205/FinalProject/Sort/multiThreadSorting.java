@@ -13,7 +13,7 @@ import static edu.neu.coe.info6205.util.SortBenchmark.getNames;
 public class multiThreadSorting {
     public static void main(String[] args) throws IOException {
         int[] words1 = {250000,500000,999998};
-        int[] threadCount={4,8};
+        int[] threadCount={4};
         for(int thread:threadCount) {
             SortBenchmark.threadCount=thread;
             SortBenchmark.threadFJP=new ForkJoinPool(SortBenchmark.threadCount);

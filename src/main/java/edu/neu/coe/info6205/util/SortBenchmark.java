@@ -34,7 +34,7 @@ import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 public class SortBenchmark {
     public static int threadCount=8;
     public  static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
-    final static LazyLogger logger = new LazyLogger(SortBenchmark.class);
+    public final static LazyLogger logger = new LazyLogger(SortBenchmark.class);
     final static Pattern regexLeipzig = Pattern.compile("[~\\t]*\\t(([\\s\\p{Punct}\\uFF0C]*\\p{L}+)*)");
     /**
      * For (basic) insertionsort, the number of array accesses is actually 6 times the number of comparisons.
@@ -78,7 +78,7 @@ public class SortBenchmark {
      */
     public static String[] getNames() throws FileNotFoundException {
         String resource = "chinese_names.txt";
-        String[] pin = chiToEng.generateList(resource);
+        String[] pin = ChineseToEnglish.generateList(resource);
         String[] chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);

@@ -1,7 +1,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.chiToEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -28,7 +28,7 @@ public class timSort<T extends Comparable<? super T>> extends Sort {
 
     public static void main(String[] args) throws IOException {
         String resource = "chinese_names.txt";
-        String[] pin = chiToEng.generateList(resource);
+        String[] pin = ChineseToEnglish.generateList(resource);
         String[] chiToEng = new String[pin.length];
         String[] resChiToEng = new String[pin.length];
 

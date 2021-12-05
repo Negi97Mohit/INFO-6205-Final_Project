@@ -1,9 +1,9 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 
-import edu.neu.coe.info6205.FinalProject.Utils.TrasnlateMain;
+import edu.neu.coe.info6205.FinalProject.Utils.engToChi;
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.chiToEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 import edu.neu.coe.info6205.util.Config;
 import edu.neu.coe.info6205.util.SortBenchmark;
 
@@ -11,6 +11,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.ForkJoinPool;
+
+import static edu.neu.coe.info6205.util.SortBenchmark.logger;
 
 public class radixSortMSD extends Sort {
 
@@ -20,28 +22,25 @@ public class radixSortMSD extends Sort {
     private static final int CUTOFF =  15;
     public static void main(String[] args) throws Exception {
         String resource="chinese_names.txt";
-        String[] pin= chiToEng.generateList(resource);
+        String[] pin= ChineseToEnglish.generateList(resource);
         String[] chiToEng=new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
         }
         int n = chiToEng.length;
-        System.out.println("Before Sorting");
+        String[] beSort=new String[chiToEng.length];
+        for(int i=0;i<n;i++)
+            beSort[i]=chiToEng[i];
+        logger.info("Starting MSD Radix Sort");
         new radixSortMSD().sort(chiToEng);
-        System.out.println("Sorted");
-        TrasnlateMain ts=new TrasnlateMain();
-        System.out.println("Started translating");
-        for(int i=0;i<chiToEng.length;i++){
-            ts.translate("en","zh-CN",chiToEng[i]);
-//            System.out.println(chiToEng[i] + pin[i]);
-        }
+        engToChi eng=new engToChi();
+        String[] res=eng.swapper(pin,beSort,chiToEng);
         System.out.println("Writing to file");
-        BufferedWriter br = new BufferedWriter(new FileWriter("myfile.csv"));
+        BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/Result.csv"));
         StringBuilder sb = new StringBuilder();
-// Append strings from array
-        for (String element : chiToEng) {
+        for (String element : res) {
             sb.append(element);
-            sb.append(",");
+            sb.append("\n");
         }
         br.write(sb.toString());
         br.close();
@@ -111,14 +110,6 @@ public class radixSortMSD extends Sort {
     private static boolean less(String v, String w, int d) {
         assert v.substring(0, d).equals(w.substring(0, d));
         return v.substring(d).compareTo(w.substring(d)) < 0;
-    }
-
-    public static void radixBench(String[] arr) throws IOException {
-        Config config = Config.load(SortBenchmark.class);
-        SortBenchmark sb=new SortBenchmark(config);
-        sb.benchmarkStringSorters(arr,5000,5000);
-
-
     }
 
 }

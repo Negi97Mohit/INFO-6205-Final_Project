@@ -3,7 +3,7 @@ package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.Utils.ChineseComparator;
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.chiToEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class Husky extends Sort {
     public static void main(String[] args) throws IOException {
         ChineseComparator y=new ChineseComparator();
         String resource="chinese_names.txt";
-        String[] pin= chiToEng.generateList(resource);
+        String[] pin= ChineseToEnglish.generateList(resource);
         String[] chiToEng=new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);

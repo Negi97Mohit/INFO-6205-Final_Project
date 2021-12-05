@@ -20,10 +20,8 @@ public class TrasnlateMain {
         String fromLang = "en";
         String toLang = "zh-CN";
         String text = "Let's have some fun!";
-
         TrasnlateMain.translate(fromLang, toLang, text);
     }
-
     /**
      * Sends out a WhatsApp message via WhatsMate WA Gateway.
      */

@@ -1,7 +1,7 @@
 package edu.neu.coe.info6205.FinalProject.Sort;
 
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.chiToEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.FileNotFoundException;
 import java.util.concurrent.ForkJoinPool;
@@ -14,7 +14,7 @@ public class radixSortLSD<X extends Comparable<X>> extends Sort {
 
     public static void main(String[] args) throws FileNotFoundException {
         String resource = "chinese_names.txt";
-        String[] pin = chiToEng.generateList(resource);
+        String[] pin = ChineseToEnglish.generateList(resource);
         String[] chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);

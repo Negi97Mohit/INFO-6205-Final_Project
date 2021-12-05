@@ -1,5 +1,7 @@
 package edu.neu.coe.huskySort.sort.huskySortUtils;
 
+import java.util.Comparator;
+
 /**
  * Base Husky sequence coder.
  */
