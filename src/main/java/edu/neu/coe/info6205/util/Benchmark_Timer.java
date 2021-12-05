@@ -4,9 +4,9 @@
 
 package edu.neu.coe.info6205.util;
 
-import edu.neu.coe.info6205.FinalProject.radixSort;
+import edu.neu.coe.info6205.FinalProject.Sort.radixSortMSD;
 import edu.neu.coe.info6205.FinalProject.regexMatch;
-import edu.neu.coe.info6205.FinalProject.toEng;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
 import java.io.FileNotFoundException;
 import java.util.function.Consumer;
@@ -217,13 +217,13 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
         }
     public static void radixBenchmark()
     {
-        radixSort rs = new radixSort();
+        radixSortMSD rs = new radixSortMSD();
         long start = System.currentTimeMillis();
         boolean alreadySorted = true;
         String resource ="chinese_names.txt";
         String[] pin = new String[0];
         try {
-            pin = toEng.generateList(resource);
+            pin = ChineseToEnglish.generateList(resource);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -3,7 +3,7 @@
  */
 package edu.neu.coe.info6205.util;
 
-import edu.neu.coe.info6205.FinalProject.TimSort;
+import edu.neu.coe.info6205.FinalProject.Sort.*;
 import edu.neu.coe.info6205.FinalProject.*;
 import edu.neu.coe.info6205.sort.BaseHelper;
 import edu.neu.coe.info6205.sort.Helper;
@@ -20,6 +20,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.*;
+import java.util.concurrent.ForkJoinPool;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -31,9 +32,9 @@ import static edu.neu.coe.info6205.util.SortBenchmarkHelper.getWords;
 import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 
 public class SortBenchmark {
-
-
-    final static LazyLogger logger = new LazyLogger(SortBenchmark.class);
+    public static int threadCount=8;
+    public  static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
+    public final static LazyLogger logger = new LazyLogger(SortBenchmark.class);
     final static Pattern regexLeipzig = Pattern.compile("[~\\t]*\\t(([\\s\\p{Punct}\\uFF0C]*\\p{L}+)*)");
     /**
      * For (basic) insertionsort, the number of array accesses is actually 6 times the number of comparisons.
@@ -77,7 +78,7 @@ public class SortBenchmark {
      */
     public static String[] getNames() throws FileNotFoundException {
         String resource = "chinese_names.txt";
-        String[] pin = toEng.generateList(resource);
+        String[] pin = ChineseToEnglish.generateList(resource);
         String[] chiToEng = new String[pin.length];
         for (int i = 0; i < pin.length; i++) {
             chiToEng[i] = regexMatch.getPingYin(pin[i]);
@@ -87,7 +88,7 @@ public class SortBenchmark {
 
     public static void radixSortMSDB(String[] arr, int nwords, int runs) {
         logger.info("SortBenchmark MSD Radix Sort with word counts: " + nwords + " with run count: " + runs);
-        radixSort rs = new radixSort();
+        radixSortMSD rs = new radixSortMSD();
         final Timer timer = new Timer();
         final int zzz = 20;
         long start = Calendar.getInstance().getTimeInMillis();
@@ -319,16 +320,18 @@ public class SortBenchmark {
     public void benchmarkStringSorters(String[] words, int nWords, int nRuns) throws IOException {
 //        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
 //        Random random = new Random();
-
-        int[] words1 = {250000, 500000, 1000000, 2000000, 4000000};
-
-        for (int word : words1) {
+        int[] runner={1,50,100};
+        int[] words1 = {250000, 500000, 999998};
+        for(int runs:runner) {
+            for (int word : words1) {
 //            radixSortMSDB(getNames(), word, 100);
 //            radixSortLSDB(getNames(), word, 100);
-            sortBenchmark(new radixSort(), getNames(), word, 100);
-            sortBenchmark(new radixSortLSD(), getNames(), word, 100);
-            sortBenchmark(new TimSort(), getNames(), word, 100);
-            sortBenchmark(new DualPivot(), getNames(), word, 100);
+                sortBenchmark(new radixSortMSD(), getNames(), word,runs);
+                sortBenchmark(new radixSortLSD(), getNames(), word,runs);
+                sortBenchmark(new timSort(), getNames(), word, runs);
+                sortBenchmark(new DualPivot(), getNames(), word, runs);
+                sortBenchmark(new Husky(), getNames(), word, runs);
+            }
         }
 
 
@@ -358,7 +361,7 @@ public class SortBenchmark {
 //            runStringSortBenchmark(words, nWords, nRuns / 10, new InsertionSort<>(nWords, config), timeLoggersQuadratic);
     }
 
-    private void sortBenchmark(Sort ss, String[] arr, int nwords, int runs) {
+    public static void sortBenchmark(Sort ss, String[] arr, int nwords, int runs) throws IOException {
         String className = ss.getClass().toString().substring(ss.getClass().toString().lastIndexOf('.') + 1, ss.getClass().toString().length());
         logger.info("SortBenchmark " + className + " with word counts: " + nwords + " with run count: " + runs);
 //        Sort rs= ss;
