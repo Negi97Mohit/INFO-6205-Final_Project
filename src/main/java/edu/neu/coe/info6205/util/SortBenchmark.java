@@ -323,6 +323,7 @@ public class SortBenchmark {
         int[] runner={100,200,400,800};
         int[] words1 = {250000, 500000, 1000000,2000000,4000000};
         for(int runs:runner) {
+            System.out.println("Benchmarking for runs:"+ runs);
             for (int word : words1) {
 //            radixSortMSDB(getNames(), word, 100);
 //            radixSortLSDB(getNames(), word, 100);
