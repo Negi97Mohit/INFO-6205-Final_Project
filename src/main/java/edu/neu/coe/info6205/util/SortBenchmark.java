@@ -328,7 +328,7 @@ public class SortBenchmark {
 //            radixSortLSDB(getNames(), word, 100);
                 sortBenchmark(new radixSortMSD(), getNames(), word,runs);
                 sortBenchmark(new radixSortLSD(), getNames(), word,runs);
-                sortBenchmark(new timSort(), getNames(), word, runs);
+                sortBenchmarkTim(new TimSort(), getNames(), word,runs);
                 sortBenchmark(new DualPivot(), getNames(), word, runs);
                 sortBenchmark(new Husky(), getNames(), word, runs);
             }
@@ -378,6 +378,35 @@ public class SortBenchmark {
                 runTest[j] = arr[index];
             }
             ss.sort(runTest);
+            long end1 = Calendar.getInstance().getTimeInMillis();
+            mean += (end1 - start1);
+        }
+        long end = Calendar.getInstance().getTimeInMillis();
+        String diffTime = String.format("%,d", (end - start));
+        String meanTime = String.format("%,d", mean / runs);
+        logger.info("Total time " + className + " with word : " + nwords + " with run : " + runs + " (ms): " + diffTime);
+        logger.info("Mean time " + className + " with word : " + nwords + " with run : " + runs + " (ms): " + meanTime);
+
+    }
+
+    public static void sortBenchmarkTim(TimSort ss, String[] arr, int nwords, int runs) throws IOException {
+        String className = ss.getClass().toString().substring(ss.getClass().toString().lastIndexOf('.') + 1, ss.getClass().toString().length());
+        logger.info("SortBenchmark " + className + " with word counts: " + nwords + " with run count: " + runs);
+//        Sort rs= ss;
+        TimSort tim = new TimSort();
+        final Timer timer = new Timer();
+        final int zzz = 20;
+        long start = Calendar.getInstance().getTimeInMillis();
+        long mean = 0;
+        Random rand = new Random();
+        for (int i = 1; i <= runs; i++) {
+            long start1 = Calendar.getInstance().getTimeInMillis();
+            String[] runTest = new String[nwords];
+            for (int j = 0; j < nwords; j++) {
+                int index = rand.nextInt(arr.length);
+                runTest[j] = arr[index];
+            }
+            tim.sort(runTest);
             long end1 = Calendar.getInstance().getTimeInMillis();
             mean += (end1 - start1);
         }

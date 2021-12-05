@@ -12,6 +12,7 @@ public class engToChi {
         for(int i=0;i<original.length;i++) {
             String find = beSort[i];
             int pos = bs.binarySearch(afSort, find);
+            System.out.println("pospos: "+pos);
             result[pos]=original[i];
         }
         for (int i=0;i<original.length;i++){
