@@ -124,7 +124,7 @@ public class SortBenchmark {
 //        if (args.length == 0) logger.warn("No word counts specified on the command line");
         SortBenchmark benchmark = new SortBenchmark(config);
 //        benchmark.sortIntegers(100000);
-//        benchmark.sortStrings(Arrays.stream(args).map(Integer::parseInt));
+        benchmark.sortStrings(Arrays.stream(args).map(Integer::parseInt));
 //        benchmark.sortLocalDateTimes(100000, config);
 //        String[] pin = benchmark.benchPreProcess();
 //        benchmark.benchPostProcess(pin);
