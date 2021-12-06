@@ -4,6 +4,7 @@
 
 **MSD Radix Sort**. The radix sort takes in a sngle variable i.e. the file name, the array produced with the Chinese character names are converted to Pinyin English using the PinYin4j java library. ( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/src/main/java/edu/neu/coe/info6205/FinalProject">Final Project File Link<a>) .
 
+Further we have compared the Radix MSD algorithm with other algos such as RadixLSD, Tim sort, Dual-Pivot quick sort,Husk sort, 3-way quick radix sort, merge sort. The benchmarking for the same has been performed. 
 ---
 ## Table of contents[![](./docs/img/pin.svg)](#table-of-contents){ Items are links to their file location }
 1. [File Structure](#File Structure)
@@ -17,10 +18,10 @@
     - [Husky Sort](#Husky Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/Husky.java">Husky</a>)
     - [3-Way Quick Radix Sort](#3-Way Quick Radix Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/ThreeWayRadix.java">3-way Quick Radix </a>)
 4. [Benchmarking Results](#Benchmarking Results)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/util/SortBenchmark.java">SortBenchmark.java </a>)
-5. [Reports](#Reports)
+5. [Reports](#Reports)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/Report%20and%20Paper">Report </a>)
    
 ---
-## Software build[![](./docs/img/pin.svg)](#software-build)
+## File Structure[![](./docs/img/pin.svg)](#software-build)
 
 _File Structure:_
 <table>
