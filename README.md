@@ -2,9 +2,8 @@
 
 ## Introduction[![](./docs/img/pin.svg)](#introduction)
 
-**MSD Radix Sort**. The radix sort takes in a sngle variable i.e. the file name, the array produced with the Chinese character names are converted to Pinyin English using the PinYin4j java library. ( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/src/main/java/edu/neu/coe/info6205/FinalProject">Final Project File Link<a>) .
-
-Further we have compared the Radix MSD algorithm with other algos such as RadixLSD, Tim sort, Dual-Pivot quick sort,Husk sort, 3-way quick radix sort, merge sort. The benchmarking for the same has been performed. 
+**MSD Radix Sort**. The radix sort takes in a sngle variable i.e. the file name, the array produced with the Chinese character names are converted to Pinyin English using the PinYin4j java library. ( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/src/main/java/edu/neu/coe/info6205/FinalProject">Final Project File Link<a>). 
+<h5>Further we have compared the Radix MSD algorithm with other algos such as RadixLSD, Tim sort, Dual-Pivot quick sort,Husk sort, 3-way quick radix sort, merge sort. The benchmarking for the same has been performed. </h5>
 ---
 ## Table of contents[![](./docs/img/pin.svg)](#table-of-contents){ Items are links to their file location }
 1. [File Structure](#File Structure)
