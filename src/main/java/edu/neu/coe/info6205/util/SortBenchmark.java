@@ -386,10 +386,10 @@ public class SortBenchmark {
 //            radixSortMSDB(getNames(), word, 100);
 //            radixSortLSDB(getNames(), word, 100);
                 sortBenchmark(new RadixSortMSD(), getNames(), word,runs);
-//                sortBenchmark(new RadixSortLSD(), getNames(), word,runs);
+                sortBenchmark(new RadixSortLSD(), getNames(), word,runs);
                 sortBenchmarkTim(new TimSort(), getNames(), word,runs);
                 sortBenchmark(new DualPivot(), getNames(), word, runs);
-//                sortBenchmark(new Husky(), getNames(), word, runs);
+                sortBenchmark(new Husky(), getNames(), word, runs);
             }
         }
 
