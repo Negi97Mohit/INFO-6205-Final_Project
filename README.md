@@ -2,7 +2,7 @@
 
 ## Introduction[![](./docs/img/pin.svg)](#introduction)
 
-**MSD Radix Sort**. The radix sort takes in a sngle variable i.e. the file name, the array produced with the Chinese character names are converted to Pinyin English using the PinYin4j java library. (https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/radixSort.java) .
+**MSD Radix Sort**. The radix sort takes in a sngle variable i.e. the file name, the array produced with the Chinese character names are converted to Pinyin English using the PinYin4j java library. ( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/src/main/java/edu/neu/coe/info6205/FinalProject">Final Project File Link<a>) .
 
 ---
 ## Table of contents[![](./docs/img/pin.svg)](#table-of-contents){ Items are links to their file location }
