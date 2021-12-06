@@ -5,8 +5,7 @@
 **MSD Radix Sort**. The radix sort takes in a sngle variable i.e. the file name, the array produced with the Chinese character names are converted to Pinyin English using the PinYin4j java library. (https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/radixSort.java) .
 
 ---
-## Table of contents[![](./docs/img/pin.svg)](#table-of-contents)
-#####{ Items are links to their file location }
+## Table of contents[![](./docs/img/pin.svg)](#table-of-contents){ Items are links to their file location }
 1. [File Structure](#File Structure)
 2. [Chinese to PinYin English](#Chinese to PinYin English)
 3. [Benchmarking](#Benchmarking)
