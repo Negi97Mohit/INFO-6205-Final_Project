@@ -3,7 +3,6 @@ package edu.neu.coe.info6205.FinalProject.Sort;
 import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 import edu.neu.coe.info6205.FinalProject.RegexMatch;
 import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
-
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -22,6 +21,7 @@ public class Merge {
         String[] beSort=new String[chiToEng.length];
         for(int i=0;i<n;i++)
             beSort[i]=chiToEng[i];
+
         String[] ClassOne = Arrays.copyOfRange(chiToEng, 0, chiToEng.length/2);
         String[] ClassTwo = Arrays.copyOfRange(chiToEng, chiToEng.length/2, chiToEng.length);
         String[] names = new String[ClassOne.length + ClassTwo.length];
@@ -41,7 +41,6 @@ public class Merge {
         }
         br.write(sb.toString());
         br.close();
-
     }
 
     public static void mergeSort(String[] names) {
@@ -75,5 +74,27 @@ public class Merge {
                 b++;
             }
         }
+    }
+
+    public static void benchmarking(String[] arr,String[] pin,String[] beSort,int n) throws IOException {
+        String[] ClassOne = Arrays.copyOfRange(arr, 0, n / 2);
+        String[] ClassTwo = Arrays.copyOfRange(arr, n / 2, n);
+        String[] names = new String[ClassOne.length + ClassTwo.length];
+        mergeSort(ClassOne);
+        mergeSort(ClassTwo);
+        merge(names, ClassOne, ClassTwo);
+
+        mergeSort(names);
+        EnglishToChinese eng=new EnglishToChinese();
+        String[] res=eng.swapper(pin,beSort,names);
+//        System.out.println("Writing to file");
+        BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/MergeSortResult.csv"));
+        StringBuilder sb = new StringBuilder();
+        for (String element : res) {
+            sb.append(element);
+            sb.append("\n");
+        }
+        br.write(sb.toString());
+        br.close();
     }
 }

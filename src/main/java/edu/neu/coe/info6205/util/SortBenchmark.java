@@ -32,8 +32,8 @@ import static edu.neu.coe.info6205.util.SortBenchmarkHelper.getWords;
 import static edu.neu.coe.info6205.util.Utilities.formatWhole;
 
 public class SortBenchmark {
-    public static int threadCount=8;
-    public  static ForkJoinPool threadFJP=new ForkJoinPool(threadCount);
+    public static int threadCount = 8;
+    public static ForkJoinPool threadFJP = new ForkJoinPool(threadCount);
     public final static LazyLogger logger = new LazyLogger(SortBenchmark.class);
     final static Pattern regexLeipzig = Pattern.compile("[~\\t]*\\t(([\\s\\p{Punct}\\uFF0C]*\\p{L}+)*)");
     /**
@@ -140,7 +140,6 @@ public class SortBenchmark {
         String meanTime = String.format("%,d", mean / runs);
         logger.info("Total time LSD Radix Sort with word : " + nwords + " with run : " + runs + " (ms): " + diffTime);
         logger.info("Mean time LSD Radix Sort with word : " + nwords + " with run : " + runs + " (ms): " + meanTime);
-
     }
 
     /**
@@ -320,16 +319,17 @@ public class SortBenchmark {
     public void benchmarkStringSorters(String[] words, int nWords, int nRuns) throws IOException {
 //        logger.info("Testing pure sorts with " + formatWhole(nRuns) + " runs of sorting " + formatWhole(nWords) + " words");
 //        Random random = new Random();
-        int[] runner={100,200,400,800};
-        int[] words1 = {250000, 500000, 1000000,2000000,4000000};
-        for(int runs:runner) {
-            System.out.println("Benchmarking for runs:"+ runs);
+        int[] runner = {100, 200, 400, 800};
+        int[] words1 = {250000, 500000, 1000000, 2000000, 4000000};
+        for (int runs : runner) {
+            System.out.println("Benchmarking for runs:" + runs);
             for (int word : words1) {
-//            radixSortMSDB(getNames(), word, 100);
-//            radixSortLSDB(getNames(), word, 100);
-                sortBenchmark(new RadixSortMSD(), getNames(), word,runs);
-                sortBenchmark(new RadixSortLSD(), getNames(), word,runs);
-                sortBenchmarkTim(new TimSort(), getNames(), word,runs);
+                sortBenchmarkMerge(word, runs);
+                radixSortMSDB(getNames(), word, 100);
+                radixSortLSDB(getNames(), word, 100);
+                sortBenchmark(new RadixSortMSD(), getNames(), word, runs);
+                sortBenchmark(new RadixSortLSD(), getNames(), word, runs);
+                sortBenchmarkTim(new TimSort(), getNames(), word, runs);
                 sortBenchmark(new DualPivot(), getNames(), word, runs);
                 sortBenchmark(new Husky(), getNames(), word, runs);
             }
@@ -387,6 +387,48 @@ public class SortBenchmark {
         String meanTime = String.format("%,d", mean / runs);
         logger.info("Total time " + className + " with word : " + nwords + " with run : " + runs + " (ms): " + diffTime);
         logger.info("Mean time " + className + " with word : " + nwords + " with run : " + runs + " (ms): " + meanTime);
+
+    }
+
+    public static void sortBenchmarkMerge(int nwords, int runs) throws IOException {
+        String resource = "chinese_names.txt";
+        String[] pin = ChineseToEnglish.generateList(resource);
+        String[] chiToEng = new String[pin.length];
+        for (int i = 0; i < pin.length; i++) {
+            chiToEng[i] = RegexMatch.getPingYin(pin[i]);
+        }
+        int n = chiToEng.length;
+        String[] beSort = new String[chiToEng.length];
+        for (int i = 0; i < n; i++)
+            beSort[i] = chiToEng[i];
+        Merge mer = new Merge();
+        final Timer timer = new Timer();
+        final int zzz = 20;
+        long start = Calendar.getInstance().getTimeInMillis();
+        long mean = 0;
+        Random rand = new Random();
+        for (int i = 1; i <= runs; i++) {
+            long start1 = Calendar.getInstance().getTimeInMillis();
+            String[] runTest = new String[nwords];
+            String[] pinner = new String[nwords];
+            String[] beSorted = new String[nwords];
+            for (int j = 0; j < nwords; j++) {
+                int index = rand.nextInt(chiToEng.length);
+                runTest[j] = chiToEng[index];
+                pinner[j] = pin[index];
+                beSorted[j] = beSort[index];
+
+            }
+            mer.benchmarking(runTest, pinner, beSorted, nwords);
+            long end1 = Calendar.getInstance().getTimeInMillis();
+            mean += (end1 - start1);
+        }
+        long end = Calendar.getInstance().getTimeInMillis();
+        String diffTime = String.format("%,d", (end - start));
+        String meanTime = String.format("%,d", mean / runs);
+        logger.info("Total time  with word : " + nwords + " with run : " + runs + " (ms): " + diffTime);
+        logger.info("Mean time  with word : " + nwords + " with run : " + runs + " (ms): " + meanTime);
+
 
     }
 
