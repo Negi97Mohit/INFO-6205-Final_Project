@@ -5,6 +5,7 @@ package edu.neu.coe.info6205.util;
 
 import edu.neu.coe.info6205.FinalProject.Sort.*;
 import edu.neu.coe.info6205.FinalProject.*;
+import edu.neu.coe.info6205.FinalProject.Utils.EnglishToChinese;
 import edu.neu.coe.info6205.sort.BaseHelper;
 import edu.neu.coe.info6205.sort.Helper;
 import edu.neu.coe.info6205.sort.SortWithHelper;
@@ -13,8 +14,11 @@ import edu.neu.coe.info6205.sort.linearithmic.IntroSort;
 import edu.neu.coe.info6205.sort.linearithmic.MergeSort;
 import edu.neu.coe.info6205.sort.linearithmic.QuickSort_3way;
 import edu.neu.coe.info6205.sort.linearithmic.QuickSort_DualPivot;
+import edu.neu.coe.info6205.FinalProject.ChineseToEnglish;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
@@ -63,6 +67,57 @@ public class SortBenchmark {
         this.config = config;
     }
 
+    public String[] benchPreProcess() throws FileNotFoundException {
+        long mean = 0;
+//        for (int j = 0; j < 100; j++) {
+            long start = Calendar.getInstance().getTimeInMillis();
+            String resource = "chinese_names.txt";
+            String[] pin = ChineseToEnglish.generateList(resource);
+            String[] chiToEng = new String[pin.length];
+            int len = pin.length;
+            for (int i = 0; i < pin.length; i++) {
+                chiToEng[i] = RegexMatch.getPingYin(pin[i]);
+            }
+            long end1 = Calendar.getInstance().getTimeInMillis();
+            System.out.println(end1 - start);
+            long total = end1 - start;
+            mean  += total;
+//        }
+        System.out.println("Preprocessing time :- "+mean/100);
+        return pin;
+
+    }
+    public void benchPostProcess(String[] pin) throws IOException {
+        long mean = 0;
+        for (int j = 0; j < 100; j++) {
+            long start = Calendar.getInstance().getTimeInMillis();
+            int l = pin.length;
+            String[] chiToEng = new String[l];
+            int n = chiToEng.length;
+            String[] beSort = new String[chiToEng.length];
+            for (int i = 0; i < n; i++)
+                beSort[i] = chiToEng[i];
+            EnglishToChinese eng = new EnglishToChinese();
+            String[] res = eng.swapper(pin, beSort, chiToEng);
+            System.out.println("Writing to file");
+            BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/Result.csv"));
+            StringBuilder sb = new StringBuilder();
+            for (String element : res) {
+                sb.append(element);
+                sb.append("\n");
+            }
+            br.write(sb.toString());
+            br.close();
+            long end1 = Calendar.getInstance().getTimeInMillis();
+            System.out.println(end1 - start);
+            long total = end1 - start;
+            mean  += total;
+        }
+        System.out.println("Postprocessing time :- "+mean/100);
+
+
+    }
+
     public static void main(String[] args) throws IOException {
         Config config = Config.load(SortBenchmark.class);
 //        logger.info("SortBenchmark.main: " + config.get("sortbenchmark", "version") + " with word counts: " + Arrays.toString(args));
@@ -71,6 +126,9 @@ public class SortBenchmark {
 //        benchmark.sortIntegers(100000);
         benchmark.sortStrings(Arrays.stream(args).map(Integer::parseInt));
 //        benchmark.sortLocalDateTimes(100000, config);
+//        String[] pin = benchmark.benchPreProcess();
+//        benchmark.benchPostProcess(pin);
+
     }
 
     /**
