@@ -123,17 +123,19 @@ public class DualPivot<X extends Comparable<X>>  extends Sort {
 //        Partition<X> send = new Partition<X>(arr, 0, arr.size());
 //      -------------------------------------------------------------------------------------
 
+
+
+        String[] beSort = new String[chiToEng.length];
+        for (int i = 0; i < chiToEng.length; i++)
+            beSort[i] = chiToEng[i];
+        logger.info("Starting MSD Radix Sort");
+
         new DualPivot().sort(chiToEng);
         show(chiToEng);
         for (int i=0; i< chiToEng.length; i++){
             System.out.println(chiToEng[i]);
         }
 
-        String[] beSort = new String[chiToEng.length];
-        for (int i = 0; i < chiToEng.length; i++)
-            beSort[i] = chiToEng[i];
-        logger.info("Starting MSD Radix Sort");
-        new RadixSortMSD().sort(chiToEng);
         EnglishToChinese eng = new EnglishToChinese();
         String[] res = eng.swapper(pin, beSort, chiToEng);
         System.out.println("Writing to file");
