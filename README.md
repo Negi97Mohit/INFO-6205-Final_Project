@@ -6,22 +6,21 @@
 
 ---
 ## Table of contents[![](./docs/img/pin.svg)](#table-of-contents)
+#####{ Items are links to their file location }
 1. [File Structure](#File Structure)
 2. [Chinese to PinYin English](#Chinese to PinYin English)
 3. [Benchmarking](#Benchmarking)
 4. [Reports](#Reports)
-5. [Advance Radix Methods](#Advance Radix Methods)
-    - [Multicast router](#mulitcast-router)
-    - [Logging service](#logging-service)
-    - [Development](#development)
-6. [Benchmarking Results](#Benchmarking Results)
-    - [MSD Radix Sort](#MSD Radix Sort)
-    - [LSD Radix Sort](#LSD Radix Sort)
-    - [Tim Sort](#Tim Sort)
-    - [Dual pivot Quick Sort](#Dual pivot Quick Sort)
-    - [Husky Sort](#Husky Sort)
-    - [MSD Radix Exchange Sort](#MSD Radix Exchange Sort)
-
+5. [Sorting Algorithms](#Sorting Algorithms)
+    - [MSD Radix Sort](#MSD Radix Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/RadixSortMSD.java">MSD Radix </a>)
+    - [LSD Radix Sort](#LSD Radix Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/RadixSortLSD.java">LSD Radix </a>)
+    - [Merge Sort](#Merge Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/Merge.java">Merge </a>)
+    - [Tim Sort](#Tim Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/TimSort.java">Tim </a>)
+    - [Dual-Pivot Quick Sort](#Dual-Pivot Quick Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/DualPivot.java">Dual-Pivot </a>)
+    - [Husky Sort](#Husky Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/Husky.java">Husky</a>)
+    - [3-Way Quick Radix Sort](#3-Way Quick Radix Sort)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/FinalProject/Sort/ThreeWayRadix.java">3-way Quick Radix </a>)
+6. [Benchmarking Results](#Benchmarking Results)( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/util/SortBenchmark.java">SortBenchmark.java </a>)
+   
 ---
 ## Software build[![](./docs/img/pin.svg)](#software-build)
 
@@ -38,6 +37,14 @@ _File Structure:_
   <tr>
     <td nowrap><strong>Utils</strong></td>
     <td>List of Utils files ( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/src/main/java/edu/neu/coe/info6205/FinalProject/Utils">Utils </a>) .</td>
+  </tr>
+  <tr>
+    <td nowrap><strong>benchmarking</strong></td>
+    <td>SortBenchmark.java ( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/blob/main/src/main/java/edu/neu/coe/info6205/util/SortBenchmark.java">SortBenchmark </a>) .</td>
+  </tr>
+  <tr>
+    <td nowrap><strong>Test Cases</strong></td>
+    <td>List of all test files for sorting algorithms( <a href="https://github.com/Negi97Mohit/INFO-6205-Final_Project/tree/main/src/test/java/edu/neu/coe/info6205/FinalProject">Test Cases </a>) .</td>
   </tr>
 </table>
 
